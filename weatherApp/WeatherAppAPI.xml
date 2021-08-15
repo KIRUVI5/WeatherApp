@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>weatherAppAPI</name>
+    </assembly>
+    <members>
+        <member name="M:weatherAppAPI.Controllers.AuthenticateController.Login(weatherApp.Shared.Model.UserModel)">
+            <summary>
+            This api endpoint used to authenticate the user
+            </summary>
+            <param name="userModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:weatherApp.Controllers.WeatherController.SyncWeatherData">
+            <summary>
+            The api controller used to sync weather data from endpoint to database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:weatherApp.Controllers.WeatherController.GetWeatherData(System.DateTime)">
+            <summary>
+            The api endpoin used to get weather data by date-time
+            </summary>
+            <param name="dateTime"></param>
+            <returns></returns>
+        </member>
+        <member name="M:weatherApp.Controllers.WeatherController.GetAllWeatherData">
+            <summary>
+            This api endpoint used to get all weather data from the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:weatherApp.Controllers.WeatherController.AddWeatherData(weatherApp.Shared.Request.WeatherDataRequest)">
+            <summary>
+            This api end point used to add weatherdata to database
+            </summary>
+            <param name="weatherDataRequest"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

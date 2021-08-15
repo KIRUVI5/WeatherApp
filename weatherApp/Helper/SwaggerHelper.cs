@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace weatherAppAPI.Helper
 {
@@ -36,6 +39,23 @@ namespace weatherAppAPI.Helper
 
                     }
                 });
+                c.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "WeatherApp Security API",
+                    Description = "WeatherApp Security API Endpoints",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Vimalan Kumarakulasingam",
+                        Url = new Uri("https://www.linkedin.com/in/mkvimalan/"),
+                    }
+                });
+
+                // Set the comments path for the Swagger JSON and UI.
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+
             });
         }
     }

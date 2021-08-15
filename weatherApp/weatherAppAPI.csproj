@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>C:\Users\vzk\Documents\Learn\VIMA\weatherApp-main\weatherApp-main\weatherApp\WeatherAppAPI.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
