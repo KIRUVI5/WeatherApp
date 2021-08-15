@@ -42,8 +42,8 @@ namespace weatherAppAPI.Helper
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "WeatherApp Security API",
-                    Description = "WeatherApp Security API Endpoints",
+                    Title = "WeatherApp API",
+                    Description = "WeatherApp API Endpoints",
                     Contact = new OpenApiContact
                     {
                         Name = "Vimalan Kumarakulasingam",
