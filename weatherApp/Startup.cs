@@ -74,22 +74,6 @@ namespace weatherApp
 
             services.AddControllers();
 
-            //================ Configuration for Swagger==============
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo
-            //    {
-            //        Version = "v1",
-            //        Title = "weatherApp API",
-            //        Description = "weatherApp API Endpoints",
-            //        Contact = new OpenApiContact
-            //        {
-            //            Name = "Vimalan Kumarakulasingam",
-            //            Url = new Uri("https://www.linkedin.com/in/mkvimalan/"),
-            //        }
-            //    });
-            //});
-
             //===================Added CorsPolicy=============================
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
