@@ -1,0 +1,59 @@
+﻿@using weatherApp.Shared.Response
+@model WeatherAPIResponse
+
+<h2>Weather Data List</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Humidity
+            </th>
+            <th>
+                Temperature
+            </th>
+            <th>
+                Min Temperature
+            </th>
+            <th>
+                Max Temperature
+            </th>
+            <th>
+               Date Time
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (WeatherDataResponse wetherData in @Model.weatherListDataResponses) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => wetherData.humidity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => wetherData.temperature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => wetherData.min_temperature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => wetherData.max_temperature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => wetherData.dateTime)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script>
+    setInterval(function () {
+        // method to be executed;
+        window.top.location.href = window.top.location.href;
+
+    }, 10000);
+       // clearInterval(interval); // thanks
+</script>
