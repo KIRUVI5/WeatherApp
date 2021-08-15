@@ -44,7 +44,6 @@ namespace weatherApp
             {
                 options.InvalidModelStateResponseFactory = context =>
                 {
-                    /// var result = new BadRequestObjectResult(context.ModelState);
                     var errors = context.ModelState
                         .Where(e => e.Value.Errors.Count > 0)
                         .Select(e => new APIError
@@ -67,7 +66,7 @@ namespace weatherApp
             //repository injection
             services.AddScoped<WeatherRepository>();
 
-            //Service injection
+            //application Service injection
             services.AddTransient<IConsumeExternalAPIService, ConsumeExternalAPIService>();
             services.AddTransient<IWeatherService, WeatherService>();
             services.AddTransient<ITokenService, TokenService>();
@@ -91,6 +90,7 @@ namespace weatherApp
                 });
             });
 
+            //===================Added CorsPolicy=============================
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -99,7 +99,7 @@ namespace weatherApp
             }));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //========= This method gets called by the runtime. Use this method to configure the HTTP request pipeline.==================
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IWeatherService weatherService)
         {
             if (env.IsDevelopment())
@@ -107,6 +107,7 @@ namespace weatherApp
                 app.UseDeveloperExceptionPage();
             }
 
+            //====add middleware==============
             app.UseMiddleware<ExceptionAndAuthenticationMiddleware>();
 
             // ========http status such as 404 will not occur above so catch here============

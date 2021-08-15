@@ -25,6 +25,13 @@ namespace weatherApp.Service.Services
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
 
+        /// <summary>
+        /// This method used to validate the JWT token
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="issuer"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
         public bool IsTokenValid(string key, string issuer, string token)
         {
             var mySecret = Encoding.UTF8.GetBytes(key);

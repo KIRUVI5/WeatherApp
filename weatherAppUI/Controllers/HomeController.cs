@@ -30,6 +30,11 @@ namespace weatherAppUI.Controllers
             return View();
         }
 
+        /// <summary>
+        /// This controller method used to login
+        /// </summary>
+        /// <param name="userModel"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("login")]
         [HttpPost]
@@ -42,6 +47,7 @@ namespace weatherAppUI.Controllers
 
             var _service = new ConsumeExternalWebAPIService<JObject>();
 
+            //make an api call for login endpoint
             var loginResposne = await _service.ProcessAPIRequest(string.Empty, ExternalEndpoints.LoginUrl, HttpVerb.POST, userModel);
 
             if (loginResposne != null)
@@ -58,6 +64,10 @@ namespace weatherAppUI.Controllers
             }
         }
 
+        /// <summary>
+        /// The default method,  make an api call for get all data
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             string token = HttpContext.Session.GetString("Token");

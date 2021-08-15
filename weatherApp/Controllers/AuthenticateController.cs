@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using weatherApp.Service.Interface;
 using weatherApp.Shared.Exceptions;
@@ -29,15 +26,22 @@ namespace weatherAppAPI.Controllers
             _userService = userService;
         }
 
+        /// <summary>
+        /// This api endpoint used to authenticate the user
+        /// </summary>
+        /// <param name="userModel"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [Route("login")]
         [HttpPost]
-        public async Task<ActionResult<LoginResponse>> Login(UserModel userModel)
+        public ActionResult<LoginResponse> Login(UserModel userModel)
         {
+            //get user to authenticate
             var validUser = _userService.GetUser(userModel);
 
             if (validUser != null)
             {
+                //generate the JWT Token
                 generatedToken = _tokenService.BuildToken(_config["JWTAuthentication:JwtKey"].ToString(), _config["JWTAuthentication:JwtIssuer"].ToString(),
                 validUser);
 

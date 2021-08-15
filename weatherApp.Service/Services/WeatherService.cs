@@ -21,12 +21,19 @@ namespace weatherApp.Service.Services
             _weatherRepository = weatherRepository;
             _consumeExternalAPIService = consumeExternalAPIService;
         }
+
+        /// <summary>
+        /// This method used to sync data from cloud to database
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult<WeatherDataResponse>> SyncWeatherData()
         {
             try
             {
+                //consume external endpoin data
                 var weatherData = _consumeExternalAPIService.ConsumeWetherData(ExternalEndpoints.WeatherDataURL);
 
+                //Save into database
                 if (weatherData != null)
                 {
                     await _weatherRepository.Add(weatherData);
@@ -43,16 +50,23 @@ namespace weatherApp.Service.Services
 
         }
 
+        /// <summary>
+        /// This method used to get weather data by date-time
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public async Task<ActionResult<WeatherAPIResponse>> GetWeatherData(DateTime dateTime)
         {
             try
             {
+                //get all data from database
                 var weatherData = await _weatherRepository.GetAll();
 
                 List<WeatherDataResponse> weatherDataResponse = new List<WeatherDataResponse>();
 
                 WeatherAPIResponse weatherAPIResponse = new WeatherAPIResponse();
 
+                //filter data by date-time , the filter works acording to dd:hh
                 if (weatherData != null)
                 {
                     weatherData = weatherData.Where(d => d.WDateTime.Date == dateTime.Date && d.WDateTime.Hour == dateTime.Hour).ToList();
@@ -74,15 +88,20 @@ namespace weatherApp.Service.Services
             }
         }
 
+        /// <summary>
+        /// Get all weather data from database
+        /// </summary>
+        /// <returns></returns>
         public async Task<ActionResult<WeatherAPIResponse>> GetAllWeatherData()
         {
             try
             {
+                //get all data from the database
                 var weatherData = await _weatherRepository.GetAll();
 
                 List<WeatherDataResponse> weatherDataResponse = new List<WeatherDataResponse>();
 
-                WeatherAPIResponse weatherAPIResponse = new WeatherAPIResponse();               
+                WeatherAPIResponse weatherAPIResponse = new WeatherAPIResponse();
 
                 foreach (var item in weatherData)
                 {
@@ -100,10 +119,16 @@ namespace weatherApp.Service.Services
             }
         }
 
+        /// <summary>
+        /// This method used to manually add weather data into database
+        /// </summary>
+        /// <param name="weatherDataRequest"></param>
+        /// <returns></returns>
         public async Task<ActionResult<WeatherDataResponse>> AddWeatherData(WeatherDataRequest weatherDataRequest)
         {
             try
             {
+                //Save into database
                 var weatherData = await _weatherRepository.Add(weatherDataRequest);
 
                 if (weatherData != null)

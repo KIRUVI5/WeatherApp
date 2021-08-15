@@ -42,7 +42,7 @@ namespace weatherApp.Shared.Middleware
                 var token = context.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
                 if (token != null)
-                    attachUserToContext(context, token);
+                    AttachUserToContext(context, token);
 
                 await _next(context);
             }
@@ -135,7 +135,7 @@ namespace weatherApp.Shared.Middleware
         }
 
 
-        private void attachUserToContext(HttpContext context, string token)
+        private void AttachUserToContext(HttpContext context, string token)
         {
             try
             {
